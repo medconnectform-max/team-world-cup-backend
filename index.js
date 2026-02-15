@@ -9,6 +9,10 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
+function p(obj) {
+  console.log(obj);
+}
+
 const port = 3000;
 
 let GLOBAL = 0;
@@ -72,7 +76,7 @@ async function details() {
       }
     }
   }
-
+  p(complete_match_id);
   return complete_match_id;
 }
 
@@ -87,12 +91,13 @@ async function get_player_runs() {
     JSON.parse(fs.readFileSync('last_match.json', 'utf8')).last,
   );
 
-  for (let id = last_match + 1; id < match_ids.length; id++) {
+  for (let id = last_match; id < match_ids.length; id++) {
     last = {
-      last: id,
+      last: id + 1,
     };
 
     await fsp.writeFile('data.json', JSON.stringify(last, null, 2), 'utf8');
+    p('calling for id:' + id);
 
     const response = await axios.get(
       `https://cricbuzz-cricket.p.rapidapi.com/mcenter/v1/${match_ids[id]}/hscard`,
@@ -137,6 +142,7 @@ app.get('/keep-alive', (req, res) => {
 cron.schedule('*/14 * * * *', async () => {
   try {
     const res = await axios.get('http://localhost:3000/keep-alive');
+    p('Ping complete');
   } catch (err) {
     console.error('Ping failed:', err.message);
   }
