@@ -97,7 +97,7 @@ async function details() {
     }
   }
 
-
+  console.log(complete_match_id);
   return complete_match_id;
 }
 
