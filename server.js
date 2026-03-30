@@ -191,7 +191,7 @@ await DataModel.findOneAndUpdate(
 
 app.get('/get-all-players', async (req, res) => {
   try {
-    await getPlayerRuns();
+  
     let runs = await DataModel.find();
      runs = runs[0].data
     const playerRuns = {};
@@ -207,6 +207,15 @@ app.get('/get-all-players', async (req, res) => {
 });
 
 
+
+app.post('/update-players', async (req, res) => {
+  try {
+    await getPlayerRuns();
+    res.json({ message: 'Player runs updated successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 async function connectDB() {
   try {
