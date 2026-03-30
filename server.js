@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express')
 const mongoose = require('mongoose')
-const cron = require('node-cron')
+const cors = require('cors');
 const axios = require('axios');
 const DataModel = require('./models/Data.model');
 const LastModel = require('./models/Last.model');
@@ -13,6 +13,7 @@ const uploadPlayers = require("./main");
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(cors());
 
 
 
@@ -40,7 +41,7 @@ const API_KEY = [
   process.env.API_7,
   process.env.API_8,
   process.env.API_9
-  
+
 ];
 
 const TOURNAMENT_LINK ='https://cricbuzz-cricket.p.rapidapi.com/series/v1/9241';
@@ -51,6 +52,8 @@ function get_key() {
 
   return key;
 }
+
+
 
 
 function sleep(ms) {
