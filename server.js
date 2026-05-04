@@ -126,6 +126,7 @@ async function getPlayerRuns(){
 
 
     const match_ids = await details();
+    console.log(match_ids)
 
     for(let id = lastMatch ; id<match_ids.length; id++){
         lastMatch++;
@@ -143,14 +144,20 @@ async function getPlayerRuns(){
               },
             );
          const json = response.data;
-     
+            
 
-            if(json.ismatchcomplete === false) continue;
+            if(  match_ids[id] !== 151891 && match_ids[id]!==151976 && match_ids[id] !== 152064 &&   match_ids[id] !== 152108 && match_ids[id] !== 152185 &&  match_ids[id] !== 152263 && json.ismatchcomplete === false ) continue;
                
             await sleep(500);
+
+            console.log(match_ids[id]);
         
             for (let i = 0; i < 2; i++) {
               const obj = json.scorecard[i];
+
+              if(obj == undefined) continue;
+
+            
              
               for (let j = 0; j < obj.batsman.length; j++) {
                 let runs = player_runs[obj.batsman[j].name];
@@ -227,8 +234,8 @@ async function connectDB() {
     process.exit(1);
   }
 }
-
 app.listen(port, async () => {
-    connectDB();
+  connectDB();
+  getPlayerRuns();
   console.log(`Example app listening on port ${port}`);
 });
