@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const LastMatch = require('./models/Last.model'); // adjust path if needed
 
 // Replace with your MongoDB URI
-// const MONGO_URI = 'mongodb+srv://adminadmin:adminadmin@cluster0.owboxdj.mongodb.net/?appName=Cluster0';
-const MONGO_URI='mongodb+srv://dholiaisha_db_user:jS6sGRzIC0eTUY9Y@cluster0ssneh.qmtv9an.mongodb.net/?appName=Cluster0ssneh'
+
 
 async function seed() {
   try {
