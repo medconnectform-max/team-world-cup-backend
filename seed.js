@@ -10,16 +10,9 @@ async function seed() {
     await mongoose.connect(MONGO_URI);
     console.log('MongoDB connected');
 
-    // Optional: clear existing data
-    await LastMatch.deleteMany({});
-    console.log('Old data removed');
+  await mongoose.connection.dropCollection('datas');
 
-    // Insert seed data
-    const data = await LastMatch.create({
-      last: 0
-    });
 
-    console.log('Seed data inserted:', data);
 
     process.exit();
   } catch (error) {
