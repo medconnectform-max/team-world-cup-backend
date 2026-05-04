@@ -155,9 +155,7 @@ async function getPlayerRuns(){
             for (let i = 0; i < 2; i++) {
               const obj = json.scorecard[i];
 
-              if(obj == undefined) continue;
-
-            
+                if (!obj || !obj.batsman) continue;
              
               for (let j = 0; j < obj.batsman.length; j++) {
                 let runs = player_runs[obj.batsman[j].name];
